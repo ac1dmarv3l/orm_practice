@@ -1,0 +1,9 @@
+.idea/
+
+/project/vendor/
+
+/logs/*
+!/logs/nginx/
+/logs/nginx/*
+!/logs/php/
+/logs/php/*

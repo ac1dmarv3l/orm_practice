@@ -1,0 +1,36 @@
+networks:
+  default-network:
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    image: php83-fpm-alpine
+    container_name: php
+    restart: unless-stopped
+    working_dir: /var/www/project
+    volumes:
+      - ./project:/var/www/project
+      - ./logs/php:/var/log/php
+    environment:
+      APP_ENV: local
+    networks:
+      - default-network
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    image: nginx-alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./project:/var/www/project
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - php
+    networks:
+      - default-network

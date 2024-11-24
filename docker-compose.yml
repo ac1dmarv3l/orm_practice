@@ -1,36 +1,63 @@
+# Define custom Docker networks
 networks:
   default-network:
 
+# Define services for the application
 services:
+
+  # PHP service configuration
   php:
     build:
+      # Path to the build context
       context: .
+      # Dockerfile for PHP
       dockerfile: docker/php/Dockerfile
+    # Image name
     image: php83-fpm-alpine
+    # Name of the container
     container_name: php
+    # Restart policy
     restart: unless-stopped
+    # Set the working directory inside the container
     working_dir: /var/www/project
     volumes:
+      # Bind the project directory to the container
       - ./project:/var/www/project
+      # Map PHP logs to the host system for debugging
       - ./logs/php:/var/log/php
+    # Environment variable for application configuration
     environment:
       APP_ENV: local
+    # Attach to the custom network
     networks:
       - default-network
+    # Run Composer and start PHP-FPM
+    command: sh -c "composer install && php-fpm"
 
+  # Nginx service configuration
   web:
     build:
+      # Path to the build context
       context: .
+      # Dockerfile for Nginx
       dockerfile: docker/nginx/Dockerfile
+    # Image name
     image: nginx-alpine
+    # Name of the container
     container_name: nginx
+    # Restart policy
     restart: unless-stopped
+    # Map container port 80 to host port 8000
     ports:
       - "8000:80"
     volumes:
+      # Bind the project directory to the container
       - ./project:/var/www/project
+      # Map Nginx logs to the host system for debugging
       - ./logs/nginx:/var/log/nginx
+    # Ensure the PHP service starts first
     depends_on:
       - php
+    # Attach to the custom network
     networks:
       - default-network

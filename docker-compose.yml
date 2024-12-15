@@ -19,10 +19,10 @@ services:
     # Restart policy
     restart: unless-stopped
     # Set the working directory inside the container
-    working_dir: /var/www/project
+    working_dir: /app
     volumes:
       # Bind the project directory to the container
-      - ./project:/var/www/project
+      - ./project:/app
       # Map PHP logs to the host system for debugging
       - ./logs/php:/var/log/php
     # Environment variable for application configuration
@@ -52,7 +52,7 @@ services:
       - "8000:80"
     volumes:
       # Bind the project directory to the container
-      - ./project:/var/www/project
+      - ./project:/app
       # Map Nginx logs to the host system for debugging
       - ./logs/nginx:/var/log/nginx
     # Ensure the PHP service starts first

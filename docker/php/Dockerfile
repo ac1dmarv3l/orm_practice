@@ -10,10 +10,10 @@ RUN apk --no-cache add \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 # Set the working directory inside the container
-WORKDIR /var/www/project
+WORKDIR /app
 
 # Copy the project files into the container
-COPY ./project /var/www/project
+COPY ./project /app
 
 # Install Composer dependencies with optimizations for production
 RUN composer install --no-dev --optimize-autoloader
@@ -29,7 +29,7 @@ RUN echo "log_errors = On" >> /usr/local/etc/php/php.ini \
     && echo "error_reporting = E_ALL" >> /usr/local/etc/php/php.ini
 
 # Ensure the project directory is owned by the web server user
-RUN chown -R www-data:www-data /var/www/project
+RUN chown -R www-data:www-data /app
 
 # Switch to the non-root user for security
 USER www-data

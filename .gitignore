@@ -3,11 +3,3 @@
 
 # Ignore all Composer dependencies
 /project/vendor/
-
-# Ignore everything in the logs directory by default
-/logs/*
-# Allow the nginx and php subdirectories within logs to be included
-!/logs/nginx/
-/logs/nginx/*.log
-!/logs/php/
-/logs/php/*.log

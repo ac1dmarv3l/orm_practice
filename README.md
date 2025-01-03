@@ -1,4 +1,4 @@
-### ac1Dmarv3L/docker-php-nginx
+### ac1Dmarv3L/docker-web-template
 
 ---
 

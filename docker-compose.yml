@@ -1,6 +1,6 @@
 # Define custom Docker networks
 networks:
-  default-network:
+  project-network:
 
 # Define services for the application
 services:
@@ -30,7 +30,7 @@ services:
       APP_ENV: local
     # Attach to the custom network
     networks:
-      - default-network
+      - project-network
     # Run Composer and start PHP-FPM
     command: sh -c "composer install && php-fpm"
 
@@ -60,4 +60,4 @@ services:
       - php
     # Attach to the custom network
     networks:
-      - default-network
+      - project-network

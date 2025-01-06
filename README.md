@@ -16,7 +16,7 @@ What's Included?
 - PHP-FPM 8.3
 - Nginx 1.27.3
 - PostgreSQL 17
-- Dockerfiles: Custom configurations for PHP-FPM and Nginx (both are Alpine-based).
+- Dockerfiles: Custom configurations for PHP-FPM, Nginx and PostgreSQL (all are Alpine-based).
 - nginx.conf: Pre-configured for PHP applications, with gzip compression and security rules.
 - .gitignore: Ensures proper exclusion of sensitive or unnecessary files, including dependencies and logs.
 

@@ -30,12 +30,11 @@ RUN echo "error_log = /var/log/php/error.log" >> /usr/local/etc/php/php.ini
 RUN echo "log_errors = On" >> /usr/local/etc/php/php.ini \
     && echo "error_reporting = E_ALL" >> /usr/local/etc/php/php.ini
 
-# Uncomment for using PostgreSQL
+# Install necessary packages for PostgreSQL
 RUN apk --no-cache add postgresql-dev \
 php83-pdo_pgsql \
 php83-pgsql \
 php83-pdo && docker-php-ext-install pdo_pgsql pgsql
-RUN #echo "extension=pdo_pgsql" >> /usr/local/etc/php/php.ini
 
 # Ensure the project directory is owned by the web server user
 RUN chown -R www-data:www-data /app

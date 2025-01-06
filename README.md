@@ -13,18 +13,20 @@ Features:
 
 What's Included?
 
+- PHP-FPM 8.3
+- Nginx 1.27.3
+- PostgreSQL 17
 - Dockerfiles: Custom configurations for PHP-FPM and Nginx (both are Alpine-based).
 - nginx.conf: Pre-configured for PHP applications, with gzip compression and security rules.
 - .gitignore: Ensures proper exclusion of sensitive or unnecessary files, including dependencies and logs.
 
 ---
 
-How to use the template for development:
+How to use:
 
-1. Clone the repository to your machine: `git clone https://github.com/ac1Dmarv3L/docker-web-template.git`
+1. Clone the repository to your machine: `git clone git@github.com:ac1Dmarv3L/docker-web-template.git`
 2. Go to the directory: `cd docker-web-template`
-3. Build the images: `docker compose build`
-4. Start the containers: `docker compose up -d`
+3. Build images and start containers: `docker compose up --build -d`
 
 ---
 

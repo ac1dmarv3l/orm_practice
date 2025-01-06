@@ -1,14 +1,13 @@
 <?php
 
-// Database connection settings
+// Database connection test
 $host = 'postgres';  // or the IP address of your database server
-$port = '5432';       // default PostgreSQL port
+$port = '5432';
 $dbname = 'my_database';
 $username = 'my_user';
 $password = 'my_password';
 
 try {
-    // Create a PDO instance
     $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
     $pdo = new PDO($dsn, $username, $password);
 
@@ -22,4 +21,4 @@ try {
 }
 
 // Output PHP configuration and environment information
-//phpinfo();
+phpinfo();

@@ -2,4 +2,16 @@
 .idea/
 
 # Ignore all Composer dependencies
-/project/vendor/
+project/vendor/
+
+data/postgres/*
+!data/postgres/.gitkeep
+
+logs/nginx/*
+!logs/nginx/.gitkeep
+
+logs/php/*
+!logs/php/.gitkeep
+
+logs/postgres/*
+!logs/postgres/.gitkeep

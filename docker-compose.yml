@@ -53,7 +53,7 @@ services:
     restart: unless-stopped
     # Map container port 80 to host port 8000
     ports:
-      - "8000:80"
+      - "${NGINX_PORT}:80"
     volumes:
       # Bind the project directory to the container
       - ./project:/app
@@ -68,23 +68,23 @@ services:
 
   postgres:
     build:
-      # Путь к build context
+      # Path to the build context
       context: .
-      # Путь к Dockerfile для PostgreSQL
+      # Dockerfile for PostgreSQL
       dockerfile: docker/postgres/Dockerfile
-    # Имя создаваемого образа
+    # Image name
     image: postgres:17-alpine
-    # Имя контейнера
+    # Container name
     container_name: postgres
-    # Политика перезапуска
+    # Restart policy
     restart: unless-stopped
-    # Настройки для монтирования данных
+    # Mounted volumes
     volumes:
-      # Хранение данных PostgreSQL на хосте
+      # Storage for PostgreSQL data on the host
       - ./data/postgres:/var/lib/postgresql/data
-      # Логи PostgreSQL
+      # Logs PostgreSQL
       - ./logs/postgres:/var/log/postgresql
-    # Настройка переменных окружения
+    # Environment variables
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -92,6 +92,6 @@ services:
       PGDATA: ${POSTGRES_PGDATA}
     ports:
       - "${POSTGRES_PORT}:5432"
-    # Подключение к сети
+    # Connection to the database
     networks:
       - project-network

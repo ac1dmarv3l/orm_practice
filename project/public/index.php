@@ -1,11 +1,11 @@
 <?php
 
 // Database connection test
-$host = 'postgres';  // or the IP address of your database server
-$port = '5432';
-$dbname = 'my_database';
-$username = 'my_user';
-$password = 'my_password';
+$host = $_ENV['HOST'];
+$port = $_ENV['POSTGRES_PORT'];
+$dbname = $_ENV['POSTGRES_DB'];
+$username = $_ENV['POSTGRES_USER'];
+$password = $_ENV['POSTGRES_PASSWORD'];
 
 try {
     $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";

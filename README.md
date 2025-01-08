@@ -2,11 +2,11 @@
 
 ---
 
-This repository provides a lightweight and flexible Docker template for local PHP web development with Nginx as the web server. It's tailored for developers who value simplicity and performance while adhering to modern containerization best practices.
+This repository provides a lightweight and flexible Docker template for local PHP web development with Nginx as the web server and PostgreSQL as the database. It's tailored for developers who value simplicity and performance while adhering to modern containerization best practices.
 
 Features:
 
-- Optimized Docker Setup: Separate containers for PHP-FPM and Nginx for better modularity.
+- Optimized Docker Setup: Separate containers for PHP-FPM, Nginx and PostgreSQL for better modularity.
 - Easy to Use: Ready-to-go configuration with minimal setup for new projects.
 - Log Management: Centralized logging directories for Nginx and PHP, with support for persistent mapping.
 - Environment Isolation: Fully isolated environment using Docker Compose.

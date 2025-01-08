@@ -27,7 +27,12 @@ services:
       - ./logs/php:/var/log/php
     # Environment variable for application configuration
     environment:
-      APP_ENV: local
+      HOST: ${HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: ${PGDATA}
     # Attach to the custom network
     networks:
       - project-network
@@ -82,12 +87,12 @@ services:
       - ./logs/postgres:/var/log/postgresql
     # Настройка переменных окружения
     environment:
-      POSTGRES_DB: my_database
-      POSTGRES_USER: my_user
-      POSTGRES_PASSWORD: my_password
-      PGDATA: /var/lib/postgresql/data/db
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: ${PGDATA}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT}:5432"
     # Подключение к сети
     networks:
       - project-network

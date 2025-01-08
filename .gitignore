@@ -1,12 +1,18 @@
 # Ignore all IDE-related files and directories
 .idea/
 
+# Ignore .env file but keep example file
+.env
+!.env.example
+
 # Ignore all Composer dependencies
 project/vendor/
 
+# Ignore database files
 data/postgres/*
 !data/postgres/.gitkeep
 
+# Ignore log files but keep directories
 logs/nginx/*
 !logs/nginx/.gitkeep
 

@@ -26,7 +26,8 @@ How to use:
 
 1. Clone the repository to your machine: `git clone git@github.com:ac1Dmarv3L/docker-web-template.git`
 2. Go to the directory: `cd docker-web-template`
-3. Build images and start containers: `docker compose up --build -d`
+3. Rename .env.example to .env and adjust it to your configuration
+4. Build images and start containers: `docker compose up --build -d`
 
 ---
 

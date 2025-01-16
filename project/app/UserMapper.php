@@ -35,8 +35,8 @@ class UserMapper
             $name = $user->getName();
             $email = $user->getEmail();
             $query = $this->connection->prepare("INSERT INTO users (name, email) VALUES (:name, :email)");
-            $query->bindParam(':name', $name(), PDO::PARAM_STR);
-            $query->bindParam(':email', $email(), PDO::PARAM_STR);
+            $query->bindParam(':name', $name, PDO::PARAM_STR);
+            $query->bindParam(':email', $email, PDO::PARAM_STR);
             $query->execute();
 
             // set ID for a new user
@@ -60,5 +60,8 @@ class UserMapper
         $query = $this->connection->prepare("DELETE FROM users WHERE id = :id");
         $query->bindParam(':id', $id, PDO::PARAM_INT);
         $query->execute();
+        $user->setId(0);
+        $user->setName("");
+        $user->setEmail("");
     }
 }

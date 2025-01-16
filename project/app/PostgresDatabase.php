@@ -5,7 +5,6 @@ namespace ac1dmarv3l\orm_practice;
 use ac1dmarv3l\orm_practice\interfaces\DatabaseInterface;
 use PDO;
 use PDOException;
-use RuntimeException;
 
 class PostgresDatabase implements DatabaseInterface
 {
@@ -34,7 +33,7 @@ class PostgresDatabase implements DatabaseInterface
                 $this->connection = new PDO($dsn, $this->username, $this->password);
                 $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
-                throw new RuntimeException('PostgreSQL connection error: ' . $e->getMessage());
+                echo 'PostgreSQL connection error: ' . $e->getMessage();
             }
         }
 

@@ -25,6 +25,9 @@ class PostgresDatabase implements DatabaseInterface
         $this->password = $config['password'] ?? null;
     }
 
+    /**
+     * @return PDO
+     */
     public function getConnection(): PDO
     {
         if ($this->connection === null) {
@@ -39,4 +42,5 @@ class PostgresDatabase implements DatabaseInterface
 
         return $this->connection;
     }
+
 }

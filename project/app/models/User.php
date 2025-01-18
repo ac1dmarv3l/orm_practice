@@ -4,23 +4,23 @@ namespace ac1dmarv3l\orm_practice\models;
 
 class User
 {
-    private int $id;
-    private string $name;
-    private string $email;
+    private ?int $id;
+    private ?string $name;
+    private ?string $email;
 
     /**
-     * @param int $id
-     * @param string $name
-     * @param string $email
+     * @param ?int $id
+     * @param ?string $name
+     * @param ?string $email
      */
-    public function __construct(int $id = 0, string $name = '', string $email = '')
+    public function __construct(int $id = null, string $name = null, string $email = null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

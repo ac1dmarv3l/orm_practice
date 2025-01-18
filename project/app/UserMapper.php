@@ -30,10 +30,11 @@ class UserMapper
 
     public function save(User $user): void
     {
-        if ($user->getId() === 0) {
+        if (!$user->getId()) {
             // create a new user
             $name = $user->getName();
             $email = $user->getEmail();
+
             $query = $this->connection->prepare("INSERT INTO users (name, email) VALUES (:name, :email)");
             $query->bindParam(':name', $name, PDO::PARAM_STR);
             $query->bindParam(':email', $email, PDO::PARAM_STR);
@@ -46,6 +47,7 @@ class UserMapper
             $id = $user->getId();
             $name = $user->getName();
             $email = $user->getEmail();
+
             $query = $this->connection->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
             $query->bindParam(':id', $id, PDO::PARAM_INT);
             $query->bindParam(':name', $name, PDO::PARAM_STR);

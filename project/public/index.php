@@ -5,6 +5,7 @@ require_once "../vendor/autoload.php";
 use ac1dmarv3l\orm_practice\DatabaseConnection;
 use ac1dmarv3l\orm_practice\models\User;
 use ac1dmarv3l\orm_practice\PostgresDatabase;
+use ac1dmarv3l\orm_practice\QueryExecutor;
 use ac1dmarv3l\orm_practice\SqliteDatabase;
 use ac1dmarv3l\orm_practice\UserMapper;
 
@@ -22,23 +23,37 @@ $sqliteConfig = [
 
 $connection = DatabaseConnection::getInstance();
 
-$postgresDatabase = new PostgresDatabase($postgresConfig);
+$pdo = $connection->connect(new PostgresDatabase($postgresConfig));
 
-$pdo1 = $connection->connect($postgresDatabase);
+// a raw query example
+$query = 'CREATE TABLE users
+(
+    user_id INT PRIMARY KEY,
+    name VARCHAR(40) NOT NULL,
+    email VARCHAR(255) NOT NULL
+)';
+
+$result = QueryExecutor::execute($pdo, $query);
+
+if ($result === true) {
+    echo 'The query successfully executed.' . PHP_EOL;
+} else {
+    echo $result . PHP_EOL;
+}
 
 // check if the same connection
-//$pdo2 = $connection->connect($postgresDatabase);
-//var_dump($pdo1 === $pdo2);
+//$pdo2 = $connection->connect(new PostgresDatabase($postgresConfig));
+//var_dump($pdo === $pdo2);
 
-// we can use different databases to initialize a connection
-$sqliteDatabase = new SqliteDatabase($sqliteConfig);
-$pdo3 = $connection->connect($sqliteDatabase);
+// it can use different databases to initialize a connection
+//$sqliteDatabase = new SqliteDatabase($sqliteConfig);
+//$pdo3 = $connection->connect($sqliteDatabase);
 
 // check if the same connection
 //$pdo4 = $connection->connect($sqliteDatabase);
 //var_dump($pdo3 === $pdo4);
 
-$userMapper = new UserMapper($pdo1);
+$userMapper = new UserMapper($pdo);
 
 // search for a user by id
 //$user = $userMapper->findById(4);
@@ -49,12 +64,13 @@ $userMapper = new UserMapper($pdo1);
 //}
 
 // create a new user
-$user = new User(0, 'Tommy', 'tommy@example.com');
+$user = new User(null, 'Tommy', 'tommy@example.com');
 
 $userMapper->save($user);
 
 // check his data
 if ($user->getId()) {
+    echo 'A new user has been created: ' . PHP_EOL;
     echo $user->getId() . PHP_EOL;
     echo $user->getName() . PHP_EOL;
     echo $user->getEmail() . PHP_EOL;
@@ -68,6 +84,7 @@ $userMapper->save($user);
 
 // check his modified data
 if ($user->getId()) {
+    echo 'The new user has been updated: ' . PHP_EOL;
     echo $user->getId() . PHP_EOL;
     echo $user->getName() . PHP_EOL;
     echo $user->getEmail() . PHP_EOL;
@@ -78,7 +95,7 @@ $userMapper->delete($user);
 
 // the user must be removed now
 if (!$user->getId()) {
-    echo 'The user was not found' . PHP_EOL;
+    echo 'The user has been deleted' . PHP_EOL;
 } else {
     // if something went wrong
     echo $user->getId() . PHP_EOL;

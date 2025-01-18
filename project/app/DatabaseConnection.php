@@ -5,6 +5,7 @@ namespace ac1dmarv3l\orm_practice;
 use ac1dmarv3l\orm_practice\interfaces\DatabaseInterface;
 use ac1dmarv3l\orm_practice\interfaces\SingletonInterface;
 use PDO;
+use PDOException;
 
 class DatabaseConnection implements SingletonInterface
 {
